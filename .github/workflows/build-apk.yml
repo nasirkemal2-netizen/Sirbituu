@@ -1,17 +1,15 @@
-name: Build Flutter APK
+name: Build APK
 
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [ main, master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Flutter
@@ -19,7 +17,7 @@ jobs:
         with:
           flutter-version: 'stable'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
       - name: Build APK
