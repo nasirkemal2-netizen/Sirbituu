@@ -52,3 +52,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// Add these imports at the top:
+import 'providers/audio_provider.dart';
+import 'providers/ai_provider.dart';
