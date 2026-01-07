@@ -15,5 +15,5 @@ git clone https://github.com/nasirk/kumkummee.git
 cd kumkummee
 flutter pub get
 flutter run 
-Phone number +251917658579  
-email address: nasirkemal2@gmail.com
+phone number : +251917658579 
+email address : nasirkemal2@gmail.com
