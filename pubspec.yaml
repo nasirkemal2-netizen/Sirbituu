@@ -15,13 +15,14 @@ dependencies:
   lottie: ^2.7.0
   http: ^1.1.0
   provider: ^6.1.1
-
-dev_dependencies:
-  flutter_test:
+dependencies:
+  flutter:
     sdk: flutter
-  flutter_lints: ^3.0.0
-
-flutter:
-  uses-material-design: true
-  assets:
-    - assets/
+  cupertino_icons: ^1.0.6
+  record: ^4.2.0
+  audio_waveforms: ^3.1.1  # Add this
+  lottie: ^2.7.0
+  http: ^1.1.0
+  provider: ^6.1.1
+  audioplayers: ^5.3.0  # Add this
+  permission_handler: ^10.4.4  # Add this
