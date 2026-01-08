@@ -40,7 +40,7 @@ class _RecordingScreenState extends State<RecordingScreen> {
         });
         
         // Start recording
-        final path = '/storage/emulated/0/Kumkummee/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+        final path = '/storage/emulated/0/Sirbituu/recording_${DateTime.now().millisecondsSinceEpoch}.m4a'; // CHANGED HERE
         await _audioRecorder.start(const RecordConfig(), path: path);
         
         // Update duration
