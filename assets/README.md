@@ -1,4 +1,4 @@
-# Assets for Kumkummee App
+# Assets for Sirbituu App
 
 This folder contains all media files for the app.
 
