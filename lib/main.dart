@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Kumkummee - AI Music Studio',
+      title: 'Sirbituu - AI Music Studio',  // CHANGED HERE
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Inter',
@@ -52,6 +52,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// Add these imports at the top:
-import 'providers/audio_provider.dart';
-import 'providers/ai_provider.dart';
