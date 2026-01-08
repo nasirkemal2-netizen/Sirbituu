@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:audio_recorder/audio_recorder.dart';
 
-class AudioProvider extends ChangeNotifier {
+class AudioProvider extends ChangeNotifier { 
+  final AudioRecorder _recorder = AudioRecorder(); 
+
   bool _isRecording = false;
   bool get isRecording => _isRecording;
   
