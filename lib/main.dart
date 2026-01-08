@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// Import screens
+// Screens
 import 'screens/home_screen.dart';
 import 'screens/recording_screen.dart';
 import 'screens/style_selection_screen.dart';
 import 'screens/editor_screen.dart';
 import 'screens/export_screen.dart';
 
-// Import providers
+// Providers
 import 'providers/audio_provider.dart';
 import 'providers/ai_provider.dart';
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sirbituu - AI Music Studio',  // CHANGED HERE
+      title: 'Sirbituu - AI Music Studio',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Inter',
