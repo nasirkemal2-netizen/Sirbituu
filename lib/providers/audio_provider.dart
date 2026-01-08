@@ -19,7 +19,7 @@ class AudioProvider extends ChangeNotifier {
       _recordingDuration = Duration.zero;
       notifyListeners();
       
-      final path = '/storage/emulated/0/Kumkummee/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+      final path = '/storage/emulated/0/Sirbituu/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
       await _recorder.start(const RecordConfig(), path: path);
       _recordedFilePath = path;
       
