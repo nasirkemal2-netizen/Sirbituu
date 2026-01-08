@@ -214,68 +214,14 @@ class _ExportScreenState extends State<ExportScreen> {
                         ),
                         
                         const SizedBox(height: 15),
-                        
-                        // Share button (disabled until export)
-                        OutlinedButton(
-                          onPressed: null,
-                          style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 55),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            side: const BorderSide(color: Colors.deepPurple),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.share, color: Colors.deepPurple),
-                                SizedBox(width: 12),
-                                Text(
-                                  'Share',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.deepPurple,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   
-                  // After export buttons
+                  // Share and New Project buttons (when export is complete)
                   if (_exportedFilePath != null)
                     Column(
                       children: [
-                        // Success message
-                        Card(
-                          color: Colors.green.withOpacity(0.1),
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Row(
-                              children: [
-                                Icon(Icons.check_circle, color: Colors.green),
-                                SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    'Export successful! File saved to device.',
-                                    style: TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        
-                        const SizedBox(height: 20),
-                        
-                        // Share exported file
+                        // Share button
                         ElevatedButton(
                           onPressed: _shareFile,
                           style: ElevatedButton.styleFrom(
@@ -307,7 +253,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         
                         const SizedBox(height: 15),
                         
-                        // New project button
+                        // New Project button
                         OutlinedButton(
                           onPressed: () {
                             Navigator.popUntil(context, (route) => route.isFirst);
@@ -357,99 +303,47 @@ class _ExportScreenState extends State<ExportScreen> {
     required bool isSelected,
   }) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      color: isSelected ? Colors.deepPurple.withOpacity(0.1) : Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          color: isSelected ? Colors.deepPurple : Colors.transparent,
-          width: 2,
-        ),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          setState(() => _selectedFormat = format);
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              // Icon
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: isSelected ? Colors.deepPurple : Colors.grey.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  icon,
-                  color: isSelected ? Colors.white : Colors.grey,
-                ),
-              ),
-              
-              const SizedBox(width: 16),
-              
-              // Text content
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          format,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: isSelected ? Colors.deepPurple : Colors.black,
-                          ),
-                        ),
-                        const Spacer(),
-                        if (isSelected)
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.deepPurple,
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      description,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Chip(
-                          label: Text(quality),
-                          backgroundColor: Colors.green.withOpacity(0.2),
-                          labelStyle: const TextStyle(
-                            color: Colors.green,
-                            fontSize: 12,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Chip(
-                          label: Text(size),
-                          backgroundColor: Colors.blue.withOpacity(0.2),
-                          labelStyle: const TextStyle(
-                            color: Colors.blue,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+      margin: const EdgeInsets.only(bottom: 10),
+      color: isSelected ? Colors.deepPurple.withOpacity(0.1) : null,
+      child: ListTile(
+        leading: Icon(icon, color: Colors.deepPurple),
+        title: Text(
+          format,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: isSelected ? Colors.deepPurple : null,
           ),
         ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(description),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                Chip(
+                  label: Text(quality),
+                  backgroundColor: Colors.deepPurple.withOpacity(0.1),
+                  labelStyle: const TextStyle(fontSize: 12),
+                ),
+                const SizedBox(width: 8),
+                Chip(
+                  label: Text(size),
+                  backgroundColor: Colors.grey.withOpacity(0.1),
+                  labelStyle: const TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ],
+        ),
+        trailing: isSelected
+            ? const Icon(Icons.check_circle, color: Colors.deepPurple)
+            : null,
+        onTap: () {
+          setState(() {
+            _selectedFormat = format;
+          });
+        },
       ),
     );
   }
@@ -544,7 +438,7 @@ class _ExportScreenState extends State<ExportScreen> {
     
     setState(() {
       _isExporting = false;
-      _exportedFilePath = '/storage/emulated/0/Kumkummee/export_${DateTime.now().millisecondsSinceEpoch}.${_selectedFormat.toLowerCase()}';
+      _exportedFilePath = '/storage/emulated/0/Sirbituu/export_${DateTime.now().millisecondsSinceEpoch}.${_selectedFormat.toLowerCase()}';
       _exportStatus = 'Export complete!';
     });
   }
@@ -553,7 +447,7 @@ class _ExportScreenState extends State<ExportScreen> {
     if (_exportedFilePath != null) {
       await Share.shareXFiles([
         XFile(_exportedFilePath!),
-      ], text: 'Check out my Kumkummee creation! 🎵');
+      ], text: 'Check out my Sirbituu creation! 🎵');
     }
   }
 }
