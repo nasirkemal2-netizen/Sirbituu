@@ -9,11 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  provider: ^6.0.0
+
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+
+  # Audio playback
   audioplayers: ^5.2.1
-  record: ^4.4.0
-  share_plus: ^7.0.1
+
+  # Audio recording (replacement – WORKING)
+  record: ^5.0.4
+
+  # Share files
+  share_plus: ^7.2.2
+
+  # Permissions (needed for record)
+  permission_handler: ^11.0.1
+
+  # File paths
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
