@@ -1,54 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+name: sirbituu
+description: AI Music Studio Afaan Oromoof
+publish_to: 'none'
+version: 1.0.0+1
 
-// Screens
-import 'screens/home_screen.dart';
-import 'screens/recording_screen.dart';
-import 'screens/style_selection_screen.dart';
-import 'screens/editor_screen.dart';
-import 'screens/export_screen.dart';
+environment:
+  sdk: ">=3.0.0 <4.0.0"
 
-// Providers
-import 'providers/audio_provider.dart';
-import 'providers/ai_provider.dart';
+dependencies:
+  flutter:
+    sdk: flutter
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AudioProvider()),
-        ChangeNotifierProvider(create: (_) => AIProvider()),
-      ],
-      child: const MyApp(),
-    ),
-  );
-}
+  cupertino_icons: ^1.0.2
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  provider: ^6.0.5
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sirbituu - AI Music Studio',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: 'Inter',
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-          elevation: 0,
-        ),
-      ),
-      home: const HomeScreen(),
-      routes: {
-        '/record': (context) => const RecordingScreen(),
-        '/style': (context) => const StyleSelectionScreen(),
-        '/edit': (context) => const EditorScreen(),
-        '/export': (context) => const ExportScreen(),
-      },
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+  audioplayers: ^5.2.1
+
+  record: ^5.0.4
+
+  share_plus: ^7.2.1
+
+  permission_handler: ^10.4.5
+
+  path_provider: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
