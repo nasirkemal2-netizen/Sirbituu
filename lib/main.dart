@@ -1,37 +1,63 @@
-name: sirbituu
-description: AI Music Studio Afaan Oromoof
-publish_to: 'none'
-version: 1.0.0+1
+import 'package:flutter/material.dart';
 
-environment:
-  sdk: ">=3.0.0 <4.0.0"
+void main() {
+  runApp(const MyApp());
+}
 
-dependencies:
-  flutter:
-    sdk: flutter
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  cupertino_icons: ^1.0.2
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Sirbituu',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
 
-  provider: ^6.0.5
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-  audioplayers: ^5.2.1
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-  record: ^5.0.4
-
-  share_plus: ^7.2.1
-
-  permission_handler: ^10.4.5
-
-  path_provider: ^2.1.2
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  flutter_lints: ^3.0.0
-
-flutter:
-  uses-material-design: true
-
-  assets:
-    - assets/
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sirbituu - AI Music Studio'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'AI Music Studio Afaan Oromoof',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Add your recording functionality here
+              },
+              child: const Text('Start Recording'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                // Add music generation functionality here
+              },
+              child: const Text('Generate Music'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
