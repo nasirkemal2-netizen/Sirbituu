@@ -1,52 +1,65 @@
-import 'package:flutter/foundation.dart';
-import 'package:audio_recorder/audio_recorder.dart';
+import 'dart:io';
 
-class AudioProvider extends ChangeNotifier { 
-  final AudioRecorder _recorder = AudioRecorder(); 
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
+
+class AudioProvider with ChangeNotifier {
+  final Record _record = Record();
 
   bool _isRecording = false;
-  bool get isRecording => _isRecording;
-  
   String? _recordedFilePath;
+
+  bool get isRecording => _isRecording;
   String? get recordedFilePath => _recordedFilePath;
-  
-  Duration _recordingDuration = Duration.zero;
-  Duration get recordingDuration => _recordingDuration;
-  
+
+  /// Start audio recording
   Future<void> startRecording() async {
-    if (await AudioRecorder.hasPermissions) {
+    try {
+      final hasPermission = await _record.hasPermission();
+      if (!hasPermission) {
+        debugPrint('Microphone permission not granted');
+        return;
+      }
+
+      final dir = await getApplicationDocumentsDirectory();
+      final filePath =
+          '${dir.path}/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+
+      await _record.start(
+        path: filePath,
+        encoder: AudioEncoder.aacLc,
+        bitRate: 128000,
+        samplingRate: 44100,
+      );
+
       _isRecording = true;
-      _recordingDuration = Duration.zero;
+      _recordedFilePath = filePath;
       notifyListeners();
-      
-      final path = '/storage/emulated/0/Sirbituu/recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
-      await AudioRecorder.start(path: path);
-      _recordedFilePath = path;
-      
-      _updateDuration();
+    } catch (e) {
+      debugPrint('Start recording error: $e');
     }
   }
-  
+
+  /// Stop audio recording
   Future<void> stopRecording() async {
-    await AudioRecorder.stop();
-    _isRecording = false;
-    notifyListeners();
-  }
-  
-  void _updateDuration() {
-    Future.delayed(const Duration(seconds: 1), () {
-      if (_isRecording) {
-        _recordingDuration += const Duration(seconds: 1);
-        notifyListeners();
-        _updateDuration();
+    try {
+      final path = await _record.stop();
+      if (path != null) {
+        _recordedFilePath = path;
       }
-    });
+
+      _isRecording = false;
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Stop recording error: $e');
+    }
   }
-  
-  void reset() {
-    _isRecording = false;
-    _recordedFilePath = null;
-    _recordingDuration = Duration.zero;
-    notifyListeners();
+
+  /// Dispose recorder
+  @override
+  void dispose() {
+    _record.dispose();
+    super.dispose();
   }
 }
